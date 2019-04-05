@@ -1,10 +1,4 @@
-var router = new VueRouter({
-    mode: 'history',
-    routes: []
-});
-
-new Vue({
-    router,
+export default {
     data() {
         return {
             genders: [{
@@ -21,8 +15,6 @@ new Vue({
         for (let gender of this.genders) {
             gender.count = parseInt(localStorage.getItem(gender.type) || 0);
         }
-
-        this.$mount('#app');
     },
     mounted() {
     },
@@ -60,4 +52,4 @@ new Vue({
     },
     watch: {
     }
-})
+};

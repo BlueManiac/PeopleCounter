@@ -7,9 +7,6 @@
         <link rel="icon" type="image/png" href="favicon.png" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
         <link rel="stylesheet" href="app.css">
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
-        <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
     </head>
     <body>
         <div class="container p-3 text-center">
@@ -23,7 +20,7 @@
                     <button class="btn btn-primary px-5 py-3" @click="increase(gender, 5)">+5</button>
                 </div>
                 <h1 class="mb-4">
-                    Total <span class="badge badge-secondary" v-html="total"></span>
+                    <span class="badge badge-secondary" v-html="total"></span> Total
                 </h1>
                 <button class="btn btn-secondary mb-4" @click="reset()">Reset</button>
                 <table class="table table-sm table-bordered table-striped">
@@ -40,6 +37,16 @@
                 </table>
             </div>
         </div>
-        <script src="app.js"></script>
+        <script type="module">
+            import App from '/App.js';
+            import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.esm.browser.min.js';
+
+            new Vue({
+                created() {
+                    this.$mount('#app');
+                },
+                mixins: [App]
+            });
+        </script>
     </body>
 </html>
