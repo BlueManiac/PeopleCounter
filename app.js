@@ -61,6 +61,11 @@ export default {
             })
 
             localStorage.setItem('sessions', JSON.stringify(this.sessions));
+        },
+        clear() {
+            localStorage.clear();
+            this.reset();
+            this.sessions = [];
         }
     },
     computed: {
