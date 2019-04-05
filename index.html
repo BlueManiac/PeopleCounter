@@ -24,7 +24,7 @@
                 </h1>
                 <button class="btn btn-secondary mb-4" @click="commit()">Store</button>
                 <button class="btn btn-secondary mb-4" @click="reset()">Reset</button>
-
+                <a class="btn btn-secondary mb-4" :href="downloadData" :download="downloadFileName" :class="{disabled: !sessions.length}">Download</a>
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="sessions-tab" data-toggle="tab" href="#sessions" role="tab" aria-controls="home" aria-selected="true">Sessions</a>

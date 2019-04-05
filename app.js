@@ -16,7 +16,7 @@ export default {
             }],
             history: [],
             sessions: [],
-            activeTab: "sessions"
+            locale: 'sv'
         }
     },
     created() {
@@ -66,6 +66,20 @@ export default {
     computed: {
         total() {
             return this.genders.reduce((sum, y) => sum + y.count, 0);
+        },
+        downloadFileName() {
+            if (!this.sessions.length)
+                return null;
+
+            return `people_${this.sessions[0].date.toLocaleString(this.locale)}.csv`;
+        },
+        downloadData() {
+            let data = [
+                ['Date', ...this.genders.map(x => x.type), 'Total'].join(','),
+                ...this.sessions.map(x => [x.date.toLocaleString(this.locale), ...x.genders.map(g => g.count), x.total].join(',')),
+            ].join("\n");
+
+            return 'data:text/csv;charset=utf-8,' + encodeURIComponent(data);
         }
     },
     watch: {
