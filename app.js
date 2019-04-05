@@ -7,6 +7,9 @@ export default {
             }, {
                 type: "Women",
                 count: 0
+            }, {
+                type: "Other",
+                count: 0
             }],
             history: []
         }
