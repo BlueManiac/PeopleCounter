@@ -15,10 +15,6 @@
     }
 }
 
-.btn {
+.counter-panel .btn {
     font-size: 30px !important;
-}
-
-.btn.sm {
-    font-size: 12px !important;
 }

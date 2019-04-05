@@ -16,7 +16,8 @@ export default {
             }],
             history: [],
             sessions: [],
-            locale: 'sv'
+            locale: 'sv',
+            sessionName: null
         }
     },
     created() {
@@ -56,11 +57,13 @@ export default {
         commit() {
             this.sessions.unshift({
                 date: new Date(),
+                name: this.sessionName,
                 genders: cloneDeep(this.genders),
                 total: this.total
             })
 
             localStorage.setItem('sessions', JSON.stringify(this.sessions));
+            this.sessionName = null;
         },
         clear() {
             localStorage.clear();
@@ -80,8 +83,8 @@ export default {
         },
         downloadData() {
             let data = [
-                ['Date', ...this.genders.map(x => x.type), 'Total'].join(','),
-                ...this.sessions.map(x => [x.date.toLocaleString(this.locale), ...x.genders.map(g => g.count), x.total].join(',')),
+                ['Date', 'Name', ...this.genders.map(x => x.type), 'Total'].join(','),
+                ...this.sessions.map(x => [x.date.toLocaleString(this.locale), x.name, ...x.genders.map(g => g.count), x.total].join(',')),
             ].join("\n");
 
             return 'data:text/csv;charset=utf-8,' + encodeURIComponent(data);
