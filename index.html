@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="icon" type="image/png" href="favicon.png" />
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="app.css">
     </head>
     <body>
@@ -22,19 +22,47 @@
                 <h1 class="mb-4">
                     <span class="badge badge-secondary" v-html="total"></span> Total
                 </h1>
+                <button class="btn btn-secondary mb-4" @click="commit()">Store</button>
                 <button class="btn btn-secondary mb-4" @click="reset()">Reset</button>
-                <table class="table table-sm table-bordered table-striped">
-                    <tr>
-                        <th>Time</th>
-                        <th>Gender</th>
-                        <th>Change</th>
-                    </tr>
-                    <tr v-for="item in history">
-                        <td v-html="item.time.toLocaleString('sv')"></td>
-                        <td v-html="item.gender"></td>
-                        <td v-html="item.change"></td>
-                    </tr>
-                </table>
+
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="sessions-tab" data-toggle="tab" href="#sessions" role="tab" aria-controls="home" aria-selected="true">Sessions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="history-tab" data-toggle="tab" href="#history" role="tab" aria-controls="profile" aria-selected="false">History</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active p-2 border border-top-0" id="sessions" role="tabpanel" aria-labelledby="sessions-tab">
+                        <table class="table table-sm table-bordered table-striped">
+                            <tr>
+                                <th>Date</th>
+                                <th v-for="gender in genders" v-html="gender.type"></th>
+                                <th>Total</th>
+                            </tr>
+                            <tr v-for="item in sessions">
+                                <td v-html="item.date.toLocaleString('sv')"></td>
+                                <th v-for="gender in item.genders" v-html="gender.count"></th>
+                                <th v-html="item.total"></th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade p-2 border border-top-0" id="history" role="tabpanel" aria-labelledby="history-tab">
+                        <table class="table table-sm table-bordered table-striped">
+                            <tr>
+                                <th>Time</th>
+                                <th>Gender</th>
+                                <th>Change</th>
+                            </tr>
+                            <tr v-for="item in history">
+                                <td v-html="item.time.toLocaleString('sv')"></td>
+                                <td v-html="item.gender"></td>
+                                <td v-html="item.change"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
         <script type="module">
@@ -48,5 +76,8 @@
                 mixins: [App]
             });
         </script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
 </html>

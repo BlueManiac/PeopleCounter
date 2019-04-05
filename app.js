@@ -1,3 +1,6 @@
+import { jsonParseDate } from "./json-helpers.js";
+import cloneDeep from 'https://cdn.jsdelivr.net/npm/lodash-es/cloneDeep.js';
+
 export default {
     data() {
         return {
@@ -11,13 +14,16 @@ export default {
                 type: "Other",
                 count: 0
             }],
-            history: []
+            history: [],
+            sessions: [],
+            activeTab: "sessions"
         }
     },
     created() {
         for (let gender of this.genders) {
             gender.count = parseInt(localStorage.getItem(gender.type) || 0);
         }
+        this.sessions = JSON.parse(localStorage.getItem('sessions') || "[]", jsonParseDate);
     },
     mounted() {
     },
@@ -46,6 +52,15 @@ export default {
                 change: change
             });
             localStorage.setItem(gender.type, gender.count);
+        },
+        commit() {
+            this.sessions.unshift({
+                date: new Date(),
+                genders: cloneDeep(this.genders),
+                total: this.total
+            })
+
+            localStorage.setItem('sessions', JSON.stringify(this.sessions));
         }
     },
     computed: {
